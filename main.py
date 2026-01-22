@@ -1,6 +1,8 @@
 #Pseudocode
 
+
 #display you are in the year 2044
+
 
 #inventory
 #store
@@ -10,7 +12,8 @@
     #you have (changable) souls
     #you have ()
 
-#start funtion
+
+#start function
 #while true
     #ask user to choose a character type (human, dog, goblin, bear)
     #ask user what color they want for their skin/fur
@@ -19,9 +22,10 @@
     #ask user what hunter type they want to be
     #update stats/data
 
-#store funtion
+
+#store function
 #while true
-    #display money from inventroy
+    #display money from inventory
     #display store items
     #ask what item they want to buy
     #if item cost is over money amount
@@ -33,9 +37,11 @@
     #else
         #input a valid number to get the item
 
+
 #data function
 #while true
     #ask if user wants to see inventory or items in store or see their stats/data
     #display/show inventory
-    #display/show store inventroy
+    #display/show store inventory
     #display stats/data
+
