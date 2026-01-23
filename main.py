@@ -3,7 +3,6 @@
 #1. Store character attributes in a list
 # Index: 0 = Strength, 1 = Intelligence, 2 = Speed, 3 = Health
 #SET attributes = [10, 8, 6, 100]
-
 #2. Store collected power-ups in a list
 #SET powerUps = empty list
 
