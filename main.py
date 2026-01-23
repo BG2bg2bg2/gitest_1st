@@ -18,3 +18,17 @@
             # if user choose to use/drop an item user can decided what item they want to use/drop
         
     # if user choose to quit the inventory will quit and user can continue with the game
+
+# human, dog ,bear, goblin 
+
+# if user is a human 
+    # user can use a sword, potions, charms and keys
+
+# if user is a dog
+    # user can bite, run faster, use potions, charms and keys
+
+# is user is a bear
+    # user can bite, run faster, use potions, charms and keys
+
+# is user is a goblin
+    # user can use a bow and arrow, use potions, charms and keys
