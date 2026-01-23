@@ -1,20 +1,32 @@
 
 #START PROGRAM
-
-#DISPLAY "You are in the year 2044."
-
-
+#def main menu 
+def main():
+    while True:
+        print("1.Make Character")
+        print("2.Store")
+        print("3. Exit")
+        choice = input("Choice: ").strip()
+        if choice == "1":
+            Set_store
+        elif choice == "2":
+            break
+    #    Otherwise: print "Invalid choice"
+        else:
+            print("Invalid choice")
 #DATA SETUP
-
 #SET level = 1
+SET_level = 1
 #SET rank = "Novice"
-#SET souls = 0
+SET_rank = "Novice"
 #SET money = 100
+SET_money = 100
 
 #// Attributes list
 #// Index: 0 = Strength, 1 = Intelligence, 2 = Speed, 3 = Health
 #SET attributes = [10, 8, 6, 100]
-
+Strength = 0,Intelligence = 0, Speed = 0,Health = 0
+Inventory = []
 #// Inventory dictionary
 #SET inventory = empty dictionary
 
@@ -25,7 +37,9 @@
 #    "Charm": 20,
 #    "Key": 30
 #}
-
+SET_store = {
+    
+}
 #// Power-ups list
 #SET powerUps = empty list
 
@@ -200,5 +214,6 @@
 #END WHILE
 
 #END PROGRAM
-
+while True:
+    main()
 
