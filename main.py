@@ -2,33 +2,59 @@
 
 
 
-# Make a dictionary that stores items
+#Create inventory dictionary
+#Create gold amount for user
 
-# Make a function for the inventory 
+#Ask user to choose a character type
+#Store character type
 
-# Ask user if they want to store anything or change anything or quit
-    
-    #if the user choose to store anything 
-        # user can collect items or buy weapons, potions, charms, and key for gates
-    
-    #if the user choose to change anything ask what they want to change
-        # user can set a soul free or use/drop an item
-        
-            # if user choose set a soul free user can decided what soul they want to choose
-            # if user choose to use/drop an item user can decided what item they want to use/drop
-        
-    # if user choose to quit the inventory will quit and user can continue with the game
+#Function inventory_menu
+    #Ask user:
+        #1. Store item
+        #2. Change item
+        #3. Quit inventory
 
-# human, dog ,bear, goblin 
+    #If user chooses store item
+        #Ask: collect or buy?
 
-# if user is a human 
-    # user can use a sword, potions, charms and keys
+        #If collect
+            #Ask for item name
+            #Add item to inventory
 
-# if user is a dog
-    # user can bite, run faster, use potions, charms and keys
+        #If buy
+            #Show items allowed for the user's character type
+            #Ask which item to buy
+            #Check if user has enough gold
+            #If yes
+                #Remove gold
+                #Add item to inventory
+            #Else
+                #Show error message
 
-# is user is a bear
-    # user can bite, run faster, use potions, charms and keys
+    #If user chooses change item
+        #Ask:
+            #1. Set soul free
+            #2. Use or drop item
 
-# is user is a goblin
-    # user can use a bow and arrow, use potions, charms and keys
+        #If set soul free
+            #Show souls in inventory
+            #Ask which soul to free
+            #Remove soul from inventory
+
+        #If use or drop item
+            #Ask which item
+            #Use or remove item from inventory
+
+    #If user chooses quit
+        #Exit inventory and return to game
+
+#Character rules:
+    #If character is human
+        #Can buy: sword, potions, charms, keys
+
+    #If character is dog or bear
+        #Can use abilities: bite, run faster
+        #Can buy: potions, charms, keys
+
+    #If character is goblin
+        #Can buy: bow and arrow, potions, charms, keys
