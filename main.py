@@ -18,7 +18,7 @@
 #   human = [ strength = 23, health = 50 ]
 #   dog = [ strength = 47 ,health= 120,]
 #   goblin  = [strength = 35 ,health= 100, ]
-#   bear = [strength = 12 ,health = 25 , ,]
+#   bear = [strength = 12 ,health = 25 ,]
 
 
 
