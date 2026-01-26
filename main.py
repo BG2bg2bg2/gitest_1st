@@ -1,7 +1,12 @@
-#Pseudocode
-
-
-#display you are in the year 2044
+#function for main
+    #call stats/data
+    #if start function not called
+        #call start
+    #call store if wanted
+    #call data function if wanted
+    #call inventory function if wanted
+    #call power function if wanted
+    #go home to change character/heal
 
 
 #inventory
@@ -13,6 +18,8 @@
     #you have ()
 
 
+
+
 #start function
 #while true
     #ask user to choose a character type (human, dog, goblin, bear)
@@ -21,6 +28,8 @@
     #ask user how tall they want to be
     #ask user what hunter type they want to be
     #update stats/data
+
+
 
 
 #store function
@@ -38,6 +47,8 @@
         #input a valid number to get the item
 
 
+
+
 #data function
 #while true
     #ask if user wants to see inventory or items in store or see their stats/data
@@ -45,3 +56,19 @@
     #display/show store inventory
     #display stats/data
 
+
+
+
+#power function
+    #if user wants to know what powers they have/wanted
+    #display the powers they have
+    #display the powers they could have
+    #display how to get powers they want
+    #display how to use the powers they have so far
+
+
+#home function
+    #display they are home
+    #ask if they want to eat
+    # ask if they want to sleep
+    # ask if they want to do anything
