@@ -1,60 +1,68 @@
-#Hi
+#START PROGRAM
 
+#1. Store character attributes in a list
+# Index: 0 = Strength, 1 = Intelligence, 2 = Speed, 3 = Health
+#SET attributes = [10, 8, 6, 100]
+#2. Store collected power-ups in a list
+#SET powerUps = empty list
 
+#3. Function: Display attributes
+#FUNCTION displayAttributes()
+#    PRINT "Character Attributes:"
+#    PRINT "Strength: " + attributes[0]
+ #   PRINT "Intelligence: " + attributes[1]
+  ## PRINT "Health: " + attributes[3]
+#END FUNCTION
 
-#Create inventory dictionary
-#Create gold amount for user
+#5. Function: Apply all power-ups to attributes
+#FUNCTION applyPowerUps()
+#    FOR each powerUp in powerUps
+#        SET name = powerUp.name
+#        SET statType = powerUp.statType
+  #      SET amount = powerUp.amount
+#
+  #      IF statType == "strength" THEN
+ #           attributes[0] = attributes[0] + amount
+ #       ELSE IF statType == "intelligence" THEN
+ #           attributes[1] = attributes[1] + amount
+ #       ELSE IF statType == "speed" THEN
+  #          attributes[2] = attributes[2] + amount
+ #       ELSE IF statType == "health" THEN
+  #          attributes[3] = attributes[3] + amount
+   #     END IF
+#
+ #       PRINT "Applied " + name + ": " + statType + " +" + amount
+  #  END FOR
 
-#Ask user to choose a character type
-#Store character type
+ #   CLEAR powerUps   
+ # remove used power-ups
+#END FUNCTION
 
-#Function inventory_menu
-    #Ask user:
-        #1. Store item
-        #2. Change item
-        #3. Quit inventory
+# 6. Main loop for inventory + attributes
+#WHILE true
+#    PRINT "1. View Attributes"
+ #   PRINT "2. Add Power-Up"
+ #   PRINT "3. Use Power-Ups"
+ #   PRINT "4. Exit"
 
-    #If user chooses store item
-        #Ask: collect or buy?
+ #   INPUT choice
 
-        #If collect
-            #Ask for item name
-            #Add item to inventory
+ #   IF choice == 1 THEN
+  #      CALL displayAttributes()
 
-        #If buy
-            #Show items allowed for the user's character type
-            #Ask which item to buy
-            #Check if user has enough gold
-            #If yes
-                #Remove gold
-                #Add item to inventory
-            #Else
-                #Show error message
+   # ELSE IF choice == 2 THEN
+    #    INPUT powerUpName
+     #   INPUT statType
+      #  INPUT amount
+       # CALL addPowerUp(powerUpName, statType, amount)
 
-    #If user chooses change item
-        #Ask:
-            #1. Set soul free
-            #2. Use or drop item
+#    ELSE IF choice == 3 THEN
+ #       CALL applyPowerUps()
 
-        #If set soul free
-            #Show souls in inventory
-            #Ask which soul to free
-            #Remove soul from inventory
+#    ELSE IF choice == 4 THEN
+#        PRINT "Exiting game..."
+#        BREAK LOOP
+#    END IF
+#END WHILE
 
-        #If use or drop item
-            #Ask which item
-            #Use or remove item from inventory
-
-    #If user chooses quit
-        #Exit inventory and return to game
-
-#Character rules:
-    #If character is human
-        #Can buy: sword, potions, charms, keys
-
-    #If character is dog or bear
-        #Can use abilities: bite, run faster
-        #Can buy: potions, charms, keys
-
-    #If character is goblin
-        #Can buy: bow and arrow, potions, charms, keys
+#END PROGRAM
