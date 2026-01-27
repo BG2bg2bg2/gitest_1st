@@ -2,50 +2,59 @@
 
 
 
-#skills = []
-skills = []
+#Create inventory dictionary
+#Create gold amount for user
 
-#souls
-souls = 0
-#level = 1
-level = 1
-# leveling up function
-def function():
-    #if user has collected 3  of souls then
-    if souls == 3:
-    # you have leveled up by one level 1 += level 
-        level += 1
-    #while level < 10 
-    while level < 10:
-    # keep adding a level for every three kills
-        
+#Ask user to choose a character type
+#Store character type
 
-# making a function to view characters options and what skills they have
-def characters_options():
-#   storing all the characterics for each character in an induval list
-#   human = [ strength = 23, health = 50 ]
-#   dog = [ strength = 47 ,health= 120,]
-#   goblin  = [strength = 35 ,health= 100, ]
-#   bear = [strength = 12 ,health = 25 ,]
-    human = ["strength" = 23, health = 50 ]
-    dog = [ "strength" = 47 ,health= 120,]
-    goblin  = ["strength" = 35 ,"health"= 100, ]
-    bear = ["strength" = 12 ,"health" = 25]
+#Function inventory_menu
+    #Ask user:
+        #1. Store item
+        #2. Change item
+        #3. Quit inventory
 
+    #If user chooses store item
+        #Ask: collect or buy?
 
+        #If collect
+            #Ask for item name
+            #Add item to inventory
 
+        #If buy
+            #Show items allowed for the user's character type
+            #Ask which item to buy
+            #Check if user has enough gold
+            #If yes
+                #Remove gold
+                #Add item to inventory
+            #Else
+                #Show error message
 
+    #If user chooses change item
+        #Ask:
+            #1. Set soul free
+            #2. Use or drop item
 
-# making a function to handle skill dependencies and prerequisites(by using if statements)
-# list for special skills [flying monkey, flying dog,spin kick]
-    # if user had 10 == souls
-    #   show user you have unlocked special skill
-    #   pull one of the random skills from the list 
-    #   add it onto the skills
-    # elif user had 8 ==  souls
-        #show user you got a special skill
-        # its flying blobfish 
-        # add blobfish to SKILL LIST
-    # elif user had 5 == souls
-    #    how user you dont get a skill
-    #else print you just moved up a level
+        #If set soul free
+            #Show souls in inventory
+            #Ask which soul to free
+            #Remove soul from inventory
+
+        #If use or drop item
+            #Ask which item
+            #Use or remove item from inventory
+
+    #If user chooses quit
+        #Exit inventory and return to game
+
+#Character rules:
+    #If character is human
+        #Can buy: sword, potions, charms, keys
+
+    #If character is dog or bear
+        #Can use abilities: bite, run faster
+        #Can buy: potions, charms, keys
+
+    #If character is goblin
+        #Can buy: bow and arrow, potions, charms, keys
