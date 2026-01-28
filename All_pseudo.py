@@ -103,50 +103,69 @@ SET_character = {
 
 def start_game():
   global SET_attributes, SET_rank, SET_character
-  print("# Character Creation (pseudocode preserved above)")
+  print("# Character Creation")
 
-  valid_types = {"human", "dog", "goblin", "bear"}
-  while True:
-    char_type_in = input("Choose a character type (Human, Dog, Goblin, Bear): ").strip()
-    if not char_type_in:
-      print("Please enter a character type.")
-      continue
-    char_type = char_type_in.title()
-    if char_type.lower() in valid_types:
-      break
-    print("Invalid type. Choose one of:", ", ".join(t.title() for t in valid_types))
+  templates = {
+    "human": ([10, 9, 7, 100], "Human Novice"),
+    "dog": ([8, 6, 12, 90], "Canine Scout"),
+    "goblin": ([12, 6, 8, 85], "Goblin Grunt"),
+    "bear": ([15, 5, 5, 130], "Bear Brute"),
+  }
 
-  # simple validation for short text qualities; allow freeform but ensure non-empty
-  def ask_nonempty(prompt, default="Unknown"):
+  def ask_nonempty(prompt):
     while True:
       v = input(prompt).strip()
       if v:
         return v
       print("Please enter a value (cannot be empty).")
 
+  def ask_int(prompt, min_value=0):
+    while True:
+      v = input(prompt).strip()
+      try:
+        n = int(v)
+        if n < min_value:
+          print(f"Enter a number >= {min_value}.")
+          continue
+        return n
+      except ValueError:
+        print("Enter a valid integer.")
+
+  # choose type (allow custom)
+  while True:
+    print("Choose a character type: Human, Dog, Goblin, Bear, or type CUSTOM to make your own")
+    char_type_in = input("Type: ").strip()
+    if not char_type_in:
+      print("Please enter a character type.")
+      continue
+    key = char_type_in.lower()
+    if key in templates or key == "custom":
+      break
+    print("Invalid type. Choose one of:", ", ".join(t.title() for t in list(templates.keys()) + ["custom"]))
+
+  if key == "custom":
+    custom_name = ask_nonempty("Enter custom character type name: ").title()
+    print("Now define base stats for your custom type.")
+    s = ask_int("Strength (integer >=0): ", 0)
+    i = ask_int("Intelligence (integer >=0): ", 0)
+    sp = ask_int("Speed (integer >=0): ", 0)
+    h = ask_int("Health (integer >=1): ", 1)
+    rank_input = input("Optional: give a rank name for this type (leave blank for default): ").strip()
+    rank_name = rank_input if rank_input else f"{custom_name} Novice"
+    SET_attributes = [s, i, sp, h]
+    SET_rank = rank_name
+    char_type = custom_name
+  else:
+    vals, rank_name = templates[key]
+    SET_attributes = vals.copy()
+    SET_rank = rank_name
+    char_type = key.title()
+
+  # gather appearance / qualities
   skin = ask_nonempty("Choose skin/fur color: ")
   eyes = ask_nonempty("Choose eye color: ")
-  # height: accept number or text but require input
   height = ask_nonempty("Choose height (e.g. 180cm, 5'11\"): ")
   hunter = ask_nonempty("Choose hunter type: ")
-
-  # Update stats based on characterType
-  if char_type == "Human":
-    SET_attributes = [10, 9, 7, 100]
-    SET_rank = "Human Novice"
-  elif char_type == "Dog":
-    SET_attributes = [8, 6, 12, 90]
-    SET_rank = "Canine Scout"
-  elif char_type == "Goblin":
-    SET_attributes = [12, 6, 8, 85]
-    SET_rank = "Goblin Grunt"
-  elif char_type == "Bear":
-    SET_attributes = [15, 5, 5, 130]
-    SET_rank = "Bear Brute"
-  else:
-    print("Unknown type, defaulting to Human.")
-    SET_attributes = [10, 8, 6, 100]
-    SET_rank = "Novice"
 
   # store character qualities for viewing later
   SET_character["type"] = char_type
@@ -173,7 +192,7 @@ def start_game():
 #END FUNCTION
 
 def display_stats():
-  print("# Display Stats (pseudocode preserved above)")
+  print("# Display Stats")
   print(f"Level: {SET_level}")
   print(f"Rank: {SET_rank}")
   print(f"Souls: {SET_souls}")
@@ -224,7 +243,7 @@ def display_stats():
 def inventory_menu():
   global Inventory, SET_souls, SET_attributes
   while True:
-    print("# Inventory Menu (pseudocode preserved above)")
+    print("# Inventory Menu")
     print("1. View Inventory")
     print("2. Use or Drop Item")
     print("3. Set a Soul Free")
@@ -321,7 +340,7 @@ def inventory_menu():
 def store_menu():
   global SET_money, Inventory, SET_store
   while True:
-    print("# Store Menu (pseudocode preserved above)")
+    print("# Store Menu ")
     print(f"Money: {SET_money}")
     if not SET_store:
       print("Store is empty.")
@@ -376,7 +395,7 @@ def store_menu():
 
 def apply_powerups():
   global SET_powerups, SET_attributes
-  print("# Apply Power-Ups (pseudocode preserved above)")
+  print("# Apply Power-Ups")
   if not SET_powerups:
     print("No power-ups to apply.")
     return
@@ -415,7 +434,7 @@ def apply_powerups():
 
 def check_level_up():
   global SET_souls, SET_level, SET_skills
-  print("# Check Level Up (pseudocode preserved above)")
+  print("# Check Level Up ")
   leveled = False
   while SET_souls >= 10:
     SET_level += 1
@@ -444,5 +463,5 @@ def check_level_up():
 #    DISPLAY "5. Exit Game"
 #END PROGRAM
 
-if __name__ == "__main__":
+while True:
   main()
