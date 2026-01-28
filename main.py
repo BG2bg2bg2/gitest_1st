@@ -1,68 +1,67 @@
-#START PROGRAM
+#Hi
 
-#1. Store character attributes in a list
-# Index: 0 = Strength, 1 = Intelligence, 2 = Speed, 3 = Health
-#SET attributes = [10, 8, 6, 100]
-#2. Store collected power-ups in a list
-#SET powerUps = empty list
+import random
 
-#3. Function: Display attributes
-#FUNCTION displayAttributes()
-#    PRINT "Character Attributes:"
-#    PRINT "Strength: " + attributes[0]
- #   PRINT "Intelligence: " + attributes[1]
-  ## PRINT "Health: " + attributes[3]
-#END FUNCTION
+#skills = []
+skills = []
 
-#5. Function: Apply all power-ups to attributes
-#FUNCTION applyPowerUps()
-#    FOR each powerUp in powerUps
-#        SET name = powerUp.name
-#        SET statType = powerUp.statType
-  #      SET amount = powerUp.amount
-#
-  #      IF statType == "strength" THEN
- #           attributes[0] = attributes[0] + amount
- #       ELSE IF statType == "intelligence" THEN
- #           attributes[1] = attributes[1] + amount
- #       ELSE IF statType == "speed" THEN
-  #          attributes[2] = attributes[2] + amount
- #       ELSE IF statType == "health" THEN
-  #          attributes[3] = attributes[3] + amount
-   #     END IF
-#
- #       PRINT "Applied " + name + ": " + statType + " +" + amount
-  #  END FOR
+#souls
+souls = 0
+#level = 1
+level = 1
+# leveling up function
+def function():
+    #if user has collected 3  of souls then
+    if souls == 3:
+    # you have leveled up by one level 1 += level 
+        level += 1
+    #while level < 10 
+    while level < 10:
+    # keep adding a level for every three kills
+      level += 1 
+        
 
- #   CLEAR powerUps   
- # remove used power-ups
-#END FUNCTION
+# making a function to view characters options and what skills they have
+def characters_options():
+#   storing all the characterics for each character in an induval list
+#   human = [ strength = 23, health = 50 ]
+#   dog = [ strength = 47 ,health= 120,]
+#   goblin  = [strength = 35 ,health= 100, ]
+#   bear = [strength = 12 ,health = 25 ,]
+    human = ["strength" = 23, health = 50 ]
+    dog = [ "strength" = 47 ,health= 120,]
+    goblin  = ["strength" = 35 ,"health"= 100, ]
+    bear = ["strength" = 12 ,"health" = 25]
 
-# 6. Main loop for inventory + attributes
-#WHILE true
-#    PRINT "1. View Attributes"
- #   PRINT "2. Add Power-Up"
- #   PRINT "3. Use Power-Ups"
- #   PRINT "4. Exit"
 
- #   INPUT choice
 
- #   IF choice == 1 THEN
-  #      CALL displayAttributes()
 
-   # ELSE IF choice == 2 THEN
-    #    INPUT powerUpName
-     #   INPUT statType
-      #  INPUT amount
-       # CALL addPowerUp(powerUpName, statType, amount)
 
-#    ELSE IF choice == 3 THEN
- #       CALL applyPowerUps()
+# making a function to handle skill dependencies and prerequisites(by using if statements)
+def skill_change():
+# list for special skills [flying monkey, flying dog,spin kick]
+  special_skills = ["flying monkey", "flying dog","spin kick,flying blobfish"]
+    # if user had 10 == souls
+  if souls == 10: 
+    #   show user you have unlocked special skill
+    print("you have unlocked a special skills")
+    #   pull one of the random skills from the list
+    random_skill = random.choice(special_skills)
+    #add it onto the skills
+    skills.append(random_skill)
+  # else if user had eqaul 8 souls
+  elif souls == 8:
+        #show user you got a special skill
+        print("you got a special skills")
+        # its flying blobfish 
+        print("ITS FLYING BLOBFISH")
+        # add blobfish to SKILL LIST
+        skills.append("flying blobfish")
 
-#    ELSE IF choice == 4 THEN
-#        PRINT "Exiting game..."
-#        BREAK LOOP
-#    END IF
-#END WHILE
-
-#END PROGRAM
+    # elif user had 5 == souls
+  elif souls == 5:
+    #    how user you dont get a skill
+    print("you dont get a skill")
+    #else print you just moved up a level
+  else:
+     print("you don't get anything")
