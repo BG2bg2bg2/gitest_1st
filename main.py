@@ -1,4 +1,3 @@
-#Hi
 human_strength = 23
 human_health = 50
 dog_strength = 47
@@ -8,8 +7,16 @@ goblin_health = 100
 bear_strength = 12
 bear_health = 25 
 
-#Create inventory dictionary
-inventory = {}
+sword = 10
+potions = 20
+charms = 10
+keys = 50
+bow = 10
+arrow = 10
+
+
+#Create inventory list
+inventory = []
 #Create gold amount for user
 gold = 100
 #Ask user to choose a character type
@@ -36,16 +43,39 @@ def inventory_menu():
     print("1. Store Item")
     print("2. Change Item")
     print("3. Quit inventory")
-    menu = input()
+    print("4. View Inventory")
+    menu = input("What do you want to do?: ")
     #If user chooses store item
         #Ask: collect or buy?
-
+    if menu == "1":
+        store_item = input("Do you want to collect or buy an item: ")
         #If collect
             #Ask for item name
             #Add item to inventory
-
+        if store_item == "collect":
+            collect = input("What item do you want to collect: ")
+            inventory.append(collect)
+            print(inventory)
         #If buy
-            #Show items allowed for the user's character type
+        #Show items allowed for the user's character type
+        if store_item == "buy":
+            if character_type == "1":
+                print("You can buy sword, potions, charms, and keys ")
+            if character_type == "2":
+                print("you can buy potions, charms, and keys")
+            if character_type == "3":
+                print("you can buy bow and arrow, potions, charms, and keys")
+            if character_type == "4":
+                print("You can buy potions, charms, and keys ")
+            buy = input("What item do you want to buy: ")
+            cost 
+            
+            inventory.append(buy)
+            print(inventory)
+
+
+
+            
             #Ask which item to buy
             #Check if user has enough gold
             #If yes
@@ -70,7 +100,7 @@ def inventory_menu():
 
     #If user chooses quit
         #Exit inventory and return to game
-
+inventory_menu()
 #Character rules:
     #If character is human
         #Can buy: sword, potions, charms, keys
