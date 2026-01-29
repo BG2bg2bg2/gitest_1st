@@ -34,9 +34,6 @@ def characters_options():
     bear = ["strength" = 12 ,"health" = 25]
 
 
-
-
-
 # making a function to handle skill dependencies and prerequisites(by using if statements)
 def skill_change():
 # list for special skills [flying monkey, flying dog,spin kick]
