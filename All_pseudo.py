@@ -3,13 +3,21 @@
 def main():
   while True:
     try:
+      print("=================")
       print("1. Make Character")
+      print("=================")
       print("2. Store")
+      print("=================")
       print("3. Inventory")
+      print("=================")
       print("4. View Stats")
+      print("=================")
       print("5. Apply Power-Ups")
+      print("=================")
       print("6. Check Level Up")
+      print("=================")
       print("7. Exit")
+      print("=================")
       choice = input("Choice: ").strip()
     except (EOFError, KeyboardInterrupt):
       print("\nExiting.")
@@ -119,7 +127,7 @@ def start_game():
         return v
       print("Please enter a value (cannot be empty).")
 
-  def ask_int(prompt, min_value=0):
+  def Ask_intger(prompt, min_value=0):
     while True:
       v = input(prompt).strip()
       try:
@@ -146,13 +154,13 @@ def start_game():
   if key == "custom":
     custom_name = ask_nonempty("Enter custom character type name: ").title()
     print("Now define base stats for your custom type.")
-    s = ask_int("Strength (integer >=0): ", 0)
-    i = ask_int("Intelligence (integer >=0): ", 0)
-    sp = ask_int("Speed (integer >=0): ", 0)
-    h = ask_int("Health (integer >=1): ", 1)
+    Strength_value = Ask_intger("Strength (integer >=0): ", 0)
+    Intelligence_Value = Ask_intger("Intelligence (integer >=0): ", 0)
+    SPeed_valie = Ask_intger("Speed (integer >=0): ", 0)
+    Health_Value = Ask_intger("Health (integer >=1): ", 1)
     rank_input = input("Optional: give a rank name for this type (leave blank for default): ").strip()
     rank_name = rank_input if rank_input else f"{custom_name} Novice"
-    SET_attributes = [s, i, sp, h]
+    SET_attributes = [Strength_value, Intelligence_Value, SPeed_valie, Health_Value]
     SET_rank = rank_name
     char_type = custom_name
   else:
@@ -243,11 +251,17 @@ def display_stats():
 def inventory_menu():
   global Inventory, SET_souls, SET_attributes
   while True:
+    print("=================")
     print("# Inventory Menu")
+    print("=================")
     print("1. View Inventory")
+    print("=================")
     print("2. Use or Drop Item")
+    print("=================")
     print("3. Set a Soul Free")
+    print("=================")
     print("4. Exit Inventory")
+    print("=================")
     choice = input("Choice: ").strip()
     if choice == "1":
       if not Inventory:
@@ -257,14 +271,21 @@ def inventory_menu():
           print(f"{i}. {it}")
     elif choice == "2":
       if not Inventory:
+        print("=================")
         print("Inventory empty.")
+        print("=================")
         continue
       # show indexed list and allow numeric or name selection
       for i, it in enumerate(Inventory, 1):
+        print("=================")
         print(f"{i}. {it}")
+        print("=================")
       sel = input("Enter item number or name to use/drop: ").strip()
+      print("=================")
       if not sel:
+        print("=================")
         print("No selection made.")
+        print("=================")
         continue
       # try number
       item = None
@@ -273,7 +294,9 @@ def inventory_menu():
         if 0 <= idx < len(Inventory):
           item = Inventory[idx]
         else:
+          print("=================")
           print("Invalid item number.")
+          print("=================")
           continue
       else:
         # case-insensitive match by name
@@ -283,16 +306,22 @@ def inventory_menu():
             item = it
             break
         if item is None:
+          print("=================")
           print("Item not found.")
+          print("=================")
           continue
 
       # Simple use behavior: potion heals, sword increases strength temporarily, others drop
       if item.lower() == "potion":
         SET_attributes[3] += 20
+        print("=================")
         print("You used a Potion. Health increased by 20.")
+        print("=================")
       elif item.lower() == "sword":
         SET_attributes[0] += 2
+        print("=================")
         print("You equipped a Sword. Strength increased by 2.")
+        print("=================")
       else:
         print(f"You dropped {item}.")
       # remove the item (first occurrence)
@@ -304,13 +333,19 @@ def inventory_menu():
     elif choice == "3":
       if SET_souls > 0:
         SET_souls -= 1
+        print("=================")
         print("You set a soul free.")
+        print("=================")
       else:
+        print("=================")
         print("No souls to free.")
+        print("=================")
     elif choice == "4":
       break
     else:
+      print("=================")
       print("Invalid choice.")
+      print("=================")
 
 #STORE FUNCTION
 
@@ -340,16 +375,25 @@ def inventory_menu():
 def store_menu():
   global SET_money, Inventory, SET_store
   while True:
+    print("=================")
     print("# Store Menu ")
+    print("=================")
     print(f"Money: {SET_money}")
+    print("=================")
     if not SET_store:
+      print("=================")
       print("Store is empty.")
+      print("=================")
       break
     for item, price in SET_store.items():
       print(f"{item}: {price}")
+      print("=================")
     choice = input("Choose an item to buy or type EXIT: ").strip()
+    print("=================")
     if not choice:
+      print("=================")
       print("Enter a valid item or EXIT.")
+      print("=================")
       continue
     if choice.upper() == "EXIT":
       break
@@ -360,17 +404,23 @@ def store_menu():
         chosen_key = key
         break
     if chosen_key is None:
+      print("=================")
       print("Enter a valid item.")
+      print("=================")
       continue
     price = SET_store[chosen_key]
     if price > SET_money:
+      print("=================")
       print("Too much for too little money.")
+      print("=================")
     else:
       SET_money -= price
       Inventory.append(chosen_key)
       # Remove item from store to match pseudocode's "REMOVE itemChoice from store"
       SET_store.pop(chosen_key, None)
+      print("=================")
       print("Item purchased!")
+      print("=================")
 
 # POWER-UP FUNCTION
 
@@ -395,9 +445,13 @@ def store_menu():
 
 def apply_powerups():
   global SET_powerups, SET_attributes
+  print("=================")
   print("# Apply Power-Ups")
+  print("=================")
   if not SET_powerups:
+    print("=================")
     print("No power-ups to apply.")
+    print("=================")
     return
   for pu in SET_powerups:
     stat = pu.get("statType", "").lower()
@@ -434,22 +488,35 @@ def apply_powerups():
 
 def check_level_up():
   global SET_souls, SET_level, SET_skills
+  print("=================")
   print("# Check Level Up ")
+  print("=================")
   leveled = False
   while SET_souls >= 10:
     SET_level += 1
     SET_souls -= 10
     leveled = True
+    print("=================")
     print("You leveled up!")
+    print("=================")
     if SET_souls >= 10:
+      print("=================")
       print("You unlocked a special skill!")
+      print("=================")
       SET_skills.append(f"Special Skill L{SET_level}")
+      print("=================")
     elif SET_souls >= 5:
+      print("=================")
       print("No new skill this level.")
+      print("=================")
     else:
+      print("=================")
       print("You moved up a level.")
+      print("=================")
   if not leveled:
+    print("=================")
     print("Not enough souls to level up.")
+    print("=================")
 
 #MAIN MENU
 
