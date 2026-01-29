@@ -7,7 +7,7 @@ cloths = {}
 stuff = []
 invent = []
 skills = []
-powers = []
+powers = ["fly", "run", "seek"]
 gold = 50
 shop = {
     'human':{'type': 'form', 'price': 22,},
@@ -90,7 +90,8 @@ def totor():
     #ask if they want to do a quick totorial on a specific power they have
     do = input("do you want to go through a quick totorial to learn how to use your powers? (Y/N): ").lower
     if do == "y":
-        
+        for i in range(powers):
+            print((1+1) + powers)
     #if the number they input is a power the have display how to use it step by step
     #else if the number they input is not a power they have
         #display it is in a later level or does not exist
@@ -109,3 +110,4 @@ def totor():
         #continue the program
     #else
         #display enter a valid input
+main()
