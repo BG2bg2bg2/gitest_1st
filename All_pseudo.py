@@ -3,7 +3,8 @@
 def main():
   while True:
     try:
-      print("=================")
+      print("")
+      print("")
       print("1. Make Character")
       print("=================")
       print("2. Store")
@@ -251,6 +252,8 @@ def display_stats():
 def inventory_menu():
   global Inventory, SET_souls, SET_attributes
   while True:
+    print("")
+    print("")
     print("=================")
     print("# Inventory Menu")
     print("=================")
