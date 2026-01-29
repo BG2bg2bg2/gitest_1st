@@ -2,6 +2,10 @@
 #options user has
 
 #global variables
+rank = {
+    "you":{'level': 1},
+    'enemy':{'level': 10}
+}
 selfs = {}
 cloths = {}
 stuff = []
@@ -22,7 +26,9 @@ def main():
     print("1 is to change your character")
     print("2 is to look through inventory")
     print("3 is to go through a quick tutorial")
-    print("enter a number 1 - 4")
+    print("4 is to see the ranks of everyone")
+    print("5 is to look/buy items in the shop")
+    print("enter a number 1 - 5")
     choice = input("What do you want to do?")
     #do you want to change your character (closet)
     if choice == '1':
@@ -43,7 +49,7 @@ def main():
     #do you want to buy items from the shop? (shop)
     elif choice == '5':
         #call shop
-        shop()
+        shopping()
 
 #funtion for closet
 def closet():
@@ -65,10 +71,20 @@ def closet():
             elif what in shop:
                 #dislpay it is in shop for $...
                 print(f"{what} is in the shop for {shop[what]["price"]} gold")
+                #ask user if they want to get that item
+                check = input("Do you want to go shopping for that item? (Y/N)").lower()
+                #if user want to go shopping
+                if check == "y":
+                    #call shopping
+                    shopping()
+                elif check == 'n':
+                    break
+                else:
+                    continue
             else:
                 #else display not able to be found or does not exist
                 print("Can't find the item that you are wanting")
-    
+            
     
         
     
@@ -88,7 +104,7 @@ def totor():
     #dislplay powers that user has
     print(powers)
     #ask if they want to do a quick totorial on a specific power they have
-    do = input("do you want to go through a quick totorial to learn how to use your powers? (Y/N): ").lower
+    do = input("do you want to go through a quick totorial to learn how to use your powers? (Y/N): ").lower()
     if do == "y":
         for i in range(powers):
             print((1+1) + powers)
@@ -97,17 +113,28 @@ def totor():
         #display it is in a later level or does not exist
 
 #funtion for seek
-    #display levels and ranks everyhting/one is at
+def seek():
+    #display levels and ranks everyhting/one is at and the diffrence between you and them
+    print(f"{'enemy'} is at {rank['enemy']['level']}")
     #display each thing is at a level that _ higher or _lower than you
-
+    print(f"your rank is at {'rank'["you": "level"]-'rank'['enemy':'level']}")
 #funtion for shop
+def shopping():
     #display every item and body in the shop and the price each is at
-    #if user wants to buy one subtract user money from item money
-        #if item is too much 
-            #dislpay you can't get into debt
-        #else if item is enough do math
-    #else if user wants to leave
-        #continue the program
-    #else
-        #display enter a valid input
+    print(shop)
+    #ask user if they want to buy something
+    ask = input("do you want to buy an item? (Y/N)").lower()
+    #if ask is yes as y
+    if ask == "y":
+        #for the items in shop assign a number to each item
+        for _ in shop():
+            
+        #if user wants to buy one subtract user money from item money
+            #if item is too much
+                #dislpay you can't get into debt
+            #else if item is enough do math
+        #else if user wants to leave
+            #continue the program
+        #else
+            #display enter a valid input
 main()
