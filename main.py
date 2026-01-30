@@ -9,12 +9,15 @@ skills = []
 souls = 0
 #level = 1
 level = 1
+
+
 # leveling up function
 def function():
     #if user has collected 3  of souls then
     if souls == 3:
     # you have leveled up by one level 1 += level 
         level += 1
+        print("you've moved up one leved")
     #while level < 10 
     while level < 10:
     # keep adding a level for every three kills
