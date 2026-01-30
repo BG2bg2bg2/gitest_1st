@@ -23,15 +23,15 @@ def function():
 
 # making a function to view characters options and what skills they have
 def characters_options():
-#   storing all the characterics for each character in an induval list
-#   human = [ strength = 23, health = 50 ]
-#   dog = [ strength = 47 ,health= 120,]
-#   goblin  = [strength = 35 ,health= 100, ]
-#   bear = [strength = 12 ,health = 25 ,]
-    human = ["strength" = 23, health = 50 ]
-    dog = [ "strength" = 47 ,health= 120,]
-    goblin  = ["strength" = 35 ,"health"= 100, ]
-    bear = ["strength" = 12 ,"health" = 25]
+    #   storing all the characterics for each character in an induval list
+    #   human = {"strength": 23, "health": 50}
+    #   dog = {"strength": 47, "health": 120}
+    #   goblin = {"strength": 35, "health": 100}
+    #   bear = {"strength": 12, "health": 25}
+    human = {"strength": 23, "health": 50}
+    dog = {"strength": 47, "health": 120}
+    goblin = {"strength": 35, "health": 100}
+    bear = {"strength": 12, "health": 25}
 
 
 # making a function to handle skill dependencies and prerequisites(by using if statements)
