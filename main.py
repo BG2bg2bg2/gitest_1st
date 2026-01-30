@@ -15,7 +15,6 @@ character = input("choose character (human, dog, bear, goblin): ")
 
 # NEW FUNCTION: View Inventory
 def view_inventory():
-    print("\n--- YOUR INVENTORY ---")
     if not inventory:
         print("Your inventory is empty.")
     else:
