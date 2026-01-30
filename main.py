@@ -11,7 +11,7 @@ store_items = {
 }
 
 # Ask user to choose a character type
-character = input("choose character (human, dog, bear, goblin): ")
+character = input("choose character(human, dog, bear, goblin): ")
 
 # NEW FUNCTION: View Inventory
 def view_inventory():
@@ -27,9 +27,9 @@ def inventory_menu():
     global gold
 
     while True:
-        print("\n1. store item")
+        print("1. store item")
         print("2. change item")
-        print("3. view inventory") # Added this option
+        print("3. view inventory") 
         print("4. quit inventory")
 
         choice = input("choose: ")
