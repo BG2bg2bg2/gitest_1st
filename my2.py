@@ -21,30 +21,43 @@ shop = {
         'goblin': {'type': 'form', 'price': 18},
         'wolf': {'type': 'form', 'price': 22},
     },
-    'shirts': {
-        'red shirt': {'type': 'shirt', 'price': 20},
-        'flag shirt': {'type': 'shirt', 'price': 33},
-    },
-    'pants': {
-        'blue shorts': {'type': 'pants', 'price': 10},
-    },
-}   
+    'cloths': {
+        'shirts': {
+            'red shirt': {'type': 'shirt', 'price': 20},
+            'flag shirt': {'type': 'shirt', 'price': 33},
+        },
+        'pants': {
+            'blue shorts': {'type': 'pants', 'price': 10},
+            'jeans': {'type': 'pants', 'price': 25},
+        }
+    }
+}
 body_type = "human"
 
 def get_shop_items():
     #Return a flat list of (name, info, category).
     items = []
-    for category, items_dict in shop.items():
-        for name, info in items_dict.items():
-            items.append((name, info, category))
+    for category, sub_dict in shop.items():
+        if category == 'bodies':
+            for name, info in sub_dict.items():
+                items.append((name, info, 'bodies'))
+        elif category == 'cloths':
+            for sub_cat, sub_items in sub_dict.items():
+                for name, info in sub_items.items():
+                    items.append((name, info, sub_cat))  # category as sub_cat like 'shirts'
     return items
 
 
 def find_in_shop(name):
     #Return (info, category) if name exists in shop, else (None, None)
-    for category, items_dict in shop.items():
-        if name in items_dict:
-            return items_dict[name], category
+    for category, sub_dict in shop.items():
+        if category == 'bodies':
+            if name in sub_dict:
+                return sub_dict[name], 'bodies'
+        elif category == 'cloths':
+            for sub_cat, sub_items in sub_dict.items():
+                if name in sub_items:
+                    return sub_items[name], sub_cat
     return None, None
 
 #funtion for main menu
@@ -81,6 +94,7 @@ def main():
 #funtion for closet
 def closet():
     global body_type
+    global gold
     #display cloths in the closet
     print("clothes:", cloths)
     #display types of bodies in closet (like human, bear, goblin, wolf, ex)
@@ -91,7 +105,11 @@ def closet():
     if ask == '1':
         #ask if they want to put it on
         what = input("What do you want to put on? ")
-        if what in cloths:
+        if not cloths:
+            print("Your closet has nothing")
+        elif what in selfs:
+            print(f"You are already wearing {what}.")
+        elif what in cloths:
             selfs[what] = cloths[what]
             print(f"You have put on {what}")
         else:
@@ -113,22 +131,29 @@ def closet():
         #change physical form
         bodies = shop.get('bodies', {})
         print("Available bodies:")
-        for b, i in bodies:
-            print(f"{i} {b} ({bodies[b]['price']} gold)")
-            i += 1
-            return i
-        pick = input("Enter the body you want to switch to (or press Enter to cancel): ")
+        body_list = list(bodies.keys())
+        for idx, b in enumerate(body_list, 1):
+            print(f"{idx} {b} ({bodies[b]['price']} gold)")
+        pick = input("Enter the number of the body you want to switch to (or press Enter to cancel): ")
         if not pick:
             return
-        #if pick is 1
-        if pick in bodies:
-            #body_type = first body_type displayed
-            body_type = pick
-            print(f"You changed your body type to {body_type}.")
-        #elif pick is 2
-            #body_type = second body_type displayed
-        else:
-            print("That body is not available.")
+        try:
+            pick_num = int(pick)
+            if 1 <= pick_num <= len(body_list):
+                body_type = body_list[pick_num - 1]
+                confirm = input(f"Do you want to buy and put on the {body_type} form? (Y/N): ").lower()
+                if confirm == 'y':
+                    if gold >= bodies[body_type]['price']:
+                        gold -= bodies[body_type]['price']
+                        print(f"You changed your body type to {body_type}.")
+                    else:
+                        print("Not enough gold.")
+                else:
+                    print("Cancelled.")
+            else:
+                print("Invalid number.")
+        except ValueError:
+            print("Please enter a number.")
             
     
         
@@ -189,7 +214,7 @@ def seek():
         print(f"Your rank is at level {you_level} ({abs(diff)} level(s) lower than the enemy).")
 #funtion for shop
 def shopping():
-    global gold
+    global gold, body_type
     #display every item and body in the shop and the price each is at
     print(shop)
     #ask user if they want to buy something
@@ -211,11 +236,28 @@ def shopping():
             num = int(choice)
             if num in items_map:
                 name, info, category = items_map[num]
-                # proceed to buy/equip: price = info['price']
+                price = info['price']
+                confirm = input(f"Do you want to buy {name} for {price} gold? (Y/N): ").lower()
+                if confirm == 'y':
+                    if gold >= price:
+                        gold -= price
+                        invent.append(name)  # add to inventory
+                        if category == 'bodies':
+                            body_type = name
+                            print(f"You bought and equipped {name}.")
+                        elif category in ['shirts', 'pants']:
+                            cloths[name] = info
+                            print(f"You bought {name} and added to your closet.")
+                        else:
+                            print(f"You bought {name}.")
+                        print(f"Remaining gold: {gold}")
+                    else:
+                        print("Not enough gold.")
+                else:
+                    print("Purchase cancelled.")
             else:
                 print("Invalid number.")
         except ValueError:
             print("Please enter a valid number.")
 
-if __name__ == "__main__":
-    main()
+main()
