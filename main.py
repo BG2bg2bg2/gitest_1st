@@ -12,7 +12,7 @@ level = 1
 
 
 # leveling up function
-def function():
+def level_function():
     #if user has collected 3  of souls then
     if souls == 3:
     # you have leveled up by one level 1 += level 
