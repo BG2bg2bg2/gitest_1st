@@ -8,7 +8,6 @@ SET_level = 1
 SET_money = 100
 SET_souls = 0
 
-# Attributes tuple: (Strength, Intelligence, Speed, Health)
 SET_attributes = (10, 8, 6, 100)
 
 Inventory = []
@@ -22,7 +21,6 @@ SET_store = {
 
 SET_powerups = []
 
-# Skills must be a SET (rubric requirement)
 SET_skills = set()
 
 SET_rank = "Novice"
@@ -35,7 +33,7 @@ SET_character = {
     "hunter": "Unknown"
 }
 
-# ---------- TUPLE HELPERS ----------
+
 
 def tuple_update_stat(attr_tuple, index, change):
     """Returns a new tuple with one stat modified (immutability)."""
@@ -61,7 +59,6 @@ def apply_stat_change(attr_tuple, stat_name, amount):
         return attr_tuple
     return tuple_update_stat(attr_tuple, index, amount)
 
-# ---------- SET HELPERS ----------
 
 def compare_skills(player_skills, enemy_skills):
     """Performs real set operations."""
@@ -70,7 +67,7 @@ def compare_skills(player_skills, enemy_skills):
     combined = player_skills.union(enemy_skills)
     return shared, unique_player, combined
 
-# ---------- CLOSURE ----------
+
 
 def soul_multiplier(multiplier):
     """Closure that remembers multiplier value."""
@@ -80,7 +77,7 @@ def soul_multiplier(multiplier):
 
 double_souls = soul_multiplier(2)
 
-# ---------- INNER FUNCTION SYSTEM ----------
+
 
 def combat_system():
     """Encapsulated combat system."""
@@ -94,7 +91,7 @@ def combat_system():
 
     return attack, combat_log
 
-# ---------- CHARACTER CREATION ----------
+
 
 def start_game():
     """Handles character creation."""
@@ -158,7 +155,7 @@ def start_game():
 
     print("Character created successfully.")
 
-# ---------- DISPLAY ----------
+
 
 def display_stats():
     """Displays player stats."""
@@ -174,7 +171,7 @@ def display_stats():
     print("Skills:", ", ".join(SET_skills) if SET_skills else "None")
     print("=================")
 
-# ---------- INVENTORY ----------
+
 
 def inventory_menu():
     """Manages inventory."""
@@ -231,7 +228,6 @@ def inventory_menu():
         elif choice == "4":
             break
 
-# ---------- STORE ----------
 
 def store_menu():
     """Handles store purchases."""
@@ -259,7 +255,7 @@ def store_menu():
                     print("Not enough money.")
                 break
 
-# ---------- POWERUPS ----------
+
 
 def apply_powerups():
     """Applies power-ups."""
@@ -273,7 +269,7 @@ def apply_powerups():
     SET_powerups.clear()
     print("Power-ups applied.")
 
-# ---------- LEVEL SYSTEM ----------
+
 
 def check_level_up():
     """Handles leveling and skill unlocks."""
@@ -285,7 +281,7 @@ def check_level_up():
         SET_skills.add(f"Skill_L{SET_level}")
         print("Level Up! Skill unlocked.")
 
-# ---------- MAIN LOOP ----------
+
 
 def main():
     while True:
@@ -321,7 +317,7 @@ def main():
         else:
             print("Invalid choice.")
 
-# ---------- RUN ----------
 
-if __name__ == "__main__":
+
+while True:
     main()
