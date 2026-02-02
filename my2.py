@@ -118,7 +118,7 @@ def closet():
         except ValueError:
             print("Please enter a valid number.")
     else:
-        print("Your inventory is empty. Go shopping to get some items!")
+        print("you can't change your character because you have no items in your inventory.")
     main()
 
 def storage():
