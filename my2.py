@@ -86,178 +86,100 @@ def main():
     elif choice == '4':
         #call seek
         seek()
-    #do you want to buy items from the shop? (shop)
     elif choice == '5':
-        #call shop
-        shopping()
-
-#funtion for closet
+        shop_menu()
+    else:
+        print("Invalid choice. Please enter a number from 1 to 5.")
+        main()
 def closet():
-    global body_type
-    global gold
-    #display cloths in the closet
-    print("clothes:", cloths)
-    #display types of bodies in closet (like human, bear, goblin, wolf, ex)
-    print("body type:", body_type)
-    #ask user if they want to change cloths or body
-    ask = input("enter a number 1 - 3\n1 is to change cloths\n2 is to change your physical form\n3 is to do a diffrent option: ")
-    #if cloths or body are in closet
-    if ask == '1':
-        #ask if they want to put it on
-        what = input("What do you want to put on? ")
-        if not cloths:
-            print("Your closet has nothing")
-        elif what in selfs:
-            print(f"You are already wearing {what}.")
-        elif what in cloths:
-            selfs[what] = cloths[what]
-            print(f"You have put on {what}")
-        else:
-            info, category = find_in_shop(what)
-            if info:
-                #display it is in shop for $...
-                print(f"{what} is in the shop for {info['price']} gold ({category}).")
-                #ask user if they want to get that item
-                check = input("Do you want to go shopping for that item? (Y/N)").lower()
-                if check == "y":
-                    #call shopping
-                    shopping()
-                else:
-                    print("Okay, item not purchased.")
-            else:
-                #else display not able to be found or does not exist
-                print("Can't find the item that you are wanting")
-    elif ask == '2':
-        #change physical form
-        bodies = shop.get('bodies', {})
-        print("Available bodies:")
-        body_list = list(bodies.keys())
-        for idx, b in enumerate(body_list, 1):
-            print(f"{idx} {b} ({bodies[b]['price']} gold)")
-        pick = input("Enter the number of the body you want to switch to (or press Enter to cancel): ")
-        if not pick:
+    #check if there is stuff in inventory
+    #if there is cloths in inventory
+    if len(invent) > 0:
+        print("These are the items in your inventory:")
+        for index, item in enumerate(invent):
+            print(f"{index + 1}. {item}")
+        choice = input("Enter the number of the item you want to wear, or 'q' to quit: ")
+        if choice.lower() == 'q':
             return
         try:
-            pick_num = int(pick)
-            if 1 <= pick_num <= len(body_list):
-                body_type = body_list[pick_num - 1]
-                confirm = input(f"Do you want to buy and put on the {body_type} form? (Y/N): ").lower()
-                if confirm == 'y':
-                    if gold >= bodies[body_type]['price']:
-                        gold -= bodies[body_type]['price']
-                        print(f"You changed your body type to {body_type}.")
-                    else:
-                        print("Not enough gold.")
+            choice_index = int(choice) - 1
+            if 0 <= choice_index < len(invent):
+                selected_item = invent[choice_index]
+                item_info, category = find_in_shop(selected_item)
+                if item_info:
+                    cloths[category] = selected_item
+                    print(f"You are now wearing the {selected_item}.")
                 else:
-                    print("Cancelled.")
+                    print("Item not found in shop data.")
             else:
-                print("Invalid number.")
-        except ValueError:
-            print("Please enter a number.")
-            
-    
-        
-    
-
-#funtion for storage
-def storage():
-    #if inventory has items
-    if invent:
-        #dislplay inventory
-        print(invent)
-    #else display there are no items in your inventory
-    else:
-        print("no items in inventory")
-
-#funtion for totorial
-def totor():
-    #dislplay powers that user has
-    print(powers)
-    #ask if they want to do a quick totorial on a specific power they have
-    do = input("do you want to go through a quick totorial to learn how to use your powers? (Y/N): ").lower()
-    if do == "y":
-        for i, p in enumerate(powers, start=1):
-            print(f"{i}. {p}")
-        choice = input("Enter the number of the power to learn about (or press Enter to return): ")
-        if not choice:
-            return
-        try:
-            idx = int(choice) - 1
-            power = powers[idx]
-            if power == 'fly':
-                print("Fly: Press F to take off. Hold to float.")
-            elif power == 'run':
-                print("Run: Press R to sprint for short bursts.")
-            elif power == 'seek':
-                print("Seek: Use to reveal nearby ranks.")
-            else:
-                print(f"No tutorial for {power}.")
-        except (ValueError, IndexError):
-            print("Invalid selection.")
-    #if the number they input is a power the have display how to use it step by step
-    #else if the number they input is not a power they have
-        #display it is in a later level or does not exist
-
-#funtion for seek
-def seek():
-    #display levels and ranks everyhting/one is at and the diffrence between you and them
-    print(f"Enemy is at level {rank['enemy']['level']}")
-    #display your level and the difference versus the enemy
-    you_level = rank['you']['level']
-    enemy_level = rank['enemy']['level']
-    diff = you_level - enemy_level
-    if diff == 0:
-        print(f"Your rank is at level {you_level} (the same as the enemy).")
-    elif diff > 0:
-        print(f"Your rank is at level {you_level} ({diff} level(s) higher than the enemy).")
-    else:
-        print(f"Your rank is at level {you_level} ({abs(diff)} level(s) lower than the enemy).")
-#funtion for shop
-def shopping():
-    global gold, body_type
-    #display every item and body in the shop and the price each is at
-    print(shop)
-    #ask user if they want to buy something
-    ask = input("do you want to buy an item? (Y/N)").lower()
-    #if ask is yes as y
-    if ask == "y":
-        #show available items with prices
-        print(f"You have {gold} gold.")
-        items = get_shop_items()  # returns list of (name, info, category)
-        items_map = {}
-        for idx, (name, info, category) in enumerate(items, start=1):
-            print(f"{idx}. {name} ({category}) - {info.get('price',0)} gold")
-            items_map[idx] = (name, info, category)
-
-        choice = input("Enter item number (or press Enter to cancel): ")
-        if not choice:
-            return
-        try:
-            num = int(choice)
-            if num in items_map:
-                name, info, category = items_map[num]
-                price = info['price']
-                confirm = input(f"Do you want to buy {name} for {price} gold? (Y/N): ").lower()
-                if confirm == 'y':
-                    if gold >= price:
-                        gold -= price
-                        invent.append(name)  # add to inventory
-                        if category == 'bodies':
-                            body_type = name
-                            print(f"You bought and equipped {name}.")
-                        elif category in ['shirts', 'pants']:
-                            cloths[name] = info
-                            print(f"You bought {name} and added to your closet.")
-                        else:
-                            print(f"You bought {name}.")
-                        print(f"Remaining gold: {gold}")
-                    else:
-                        print("Not enough gold.")
-                else:
-                    print("Purchase cancelled.")
-            else:
-                print("Invalid number.")
+                print("Invalid selection.")
         except ValueError:
             print("Please enter a valid number.")
+    else:
+        print("Your inventory is empty. Go shopping to get some items!")
+    main()
+
+def storage():
+    #check if there is stuff in inventory
+    if len(invent) > 0:
+        print("These are the items in your inventory:")
+        for item in invent:
+            print(f"- {item}")
+    else:
+        print("Your inventory is empty.")
+    main()
+def totor():
+    print("Welcome to the tutorial!")
+    #display what pweres do you want to learn about
+    #display powers you have
+    print("You have the following powers:")
+    for power in powers:
+        print(f"- {power}")
+    print("Each power allows you to perform different actions in the game.")
+    #display how to use each power
+    print("Here's a brief overview of each power:")
+    #for inidex in enumorate powers
+    #display index + 1 and power
+    for index, power in enumerate(powers):
+        print(f"{index + 1}. {power}")
+    print("To use a power, you go through the compat situation and each one gives you ability to help go through each room  .")
+    main()
+    #display index in enumorate skills
+    #dislpay index + 1 and skill
+    for index, skill in enumerate(skills):
+        print(f"{index + 1}. {skill}")
+        #display how to use each skill
+    print("Skills are special abilities that you can unlock as you progress in the game and level up.")
+def seek():
+    print("Current Ranks:")
+    for name, info in rank.items():
+        print(f"{name.capitalize()}: Level {info['level']}")
+    main()
+def shop_menu():
+    global gold
+    print(f"You have {gold} gold.")
+    items = get_shop_items()
+    print("Items available in the shop:")
+    for index, (name, info, category) in enumerate(items):
+        print(f"{index + 1}. {name} ({category}) - {info['price']} gold")
+    choice = input("Enter the number of the item you want to buy, or 'q' to quit: ")
+    if choice.lower() == 'q':
+        main()
+        return
+    try:
+        choice_index = int(choice) - 1
+        if 0 <= choice_index < len(items): 
+            selected_name, selected_info,  selected_category = items[choice_index]
+            if gold >= selected_info['price']:
+                gold -= selected_info['price']
+                invent.append(selected_name)
+                print(f"You bought a {selected_name} for {selected_info['price']} gold.")
+            else:
+                print("You don't have enough gold to buy that item.")
+        else:
+            print("Invalid selection.")
+    except ValueError:
+        print("Please enter a valid number.")
+    shop_menu()
 
 main()
