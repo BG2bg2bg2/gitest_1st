@@ -63,7 +63,7 @@ def find_in_shop(name):
 #funtion for main menu
 def main():
     #ask the user for the following
-    print("1 is to change your character")
+    print("\n1 is to change your character")
     print("2 is to look through inventory")
     print("3 is to go through a quick tutorial")
     print("4 is to see the ranks of everyone")
@@ -78,8 +78,9 @@ def main():
     elif choice == '2':
         #call storage
         storage()
-    #do you want to go through a toltorial to get to know your powers? (totorial)
+    #do you want to go through a tutorial (totor)
     elif choice == '3':
+        #call storage
         #call tutorial
         totor()
     #do you want to know the ranks of everything around you? (seek)
@@ -89,16 +90,17 @@ def main():
     elif choice == '5':
         shop_menu()
     else:
-        print("Invalid choice. Please enter a number from 1 to 5.")
+        print("\nInvalid choice. Please enter a number from 1 to 5.")
         main()
+
 def closet():
     #check if there is stuff in inventory
     #if there is cloths in inventory
     if len(invent) > 0:
-        print("These are the items in your inventory:")
+        print("\nThese are the items in your inventory:")
         for index, item in enumerate(invent):
             print(f"{index + 1}. {item}")
-        choice = input("Enter the number of the item you want to wear, or 'q' to quit: ")
+        choice = input("\nEnter the number of the item you want to wear, or 'q' to quit: ")
         if choice.lower() == 'q':
             return
         try:
@@ -108,9 +110,9 @@ def closet():
                 item_info, category = find_in_shop(selected_item)
                 if item_info:
                     cloths[category] = selected_item
-                    print(f"You are now wearing the {selected_item}.")
+                    print(f"\nYou are now wearing the {selected_item}.")
                 else:
-                    print("Item not found in shop data.")
+                    print("\nItem not found in shop data.")
             else:
                 print("Invalid selection.")
         except ValueError:
@@ -128,6 +130,7 @@ def storage():
     else:
         print("Your inventory is empty.")
     main()
+
 def totor():
     print("Welcome to the tutorial!")
     #display what pweres do you want to learn about
@@ -137,9 +140,6 @@ def totor():
         print(f"- {power}")
     print("Each power allows you to perform different actions in the game.")
     #display how to use each power
-    print("Here's a brief overview of each power:")
-    #for inidex in enumorate powers
-    #display index + 1 and power
     for index, power in enumerate(powers):
         print(f"{index + 1}. {power}")
     print("To use a power, you go through the compat situation and each one gives you ability to help go through each room  .")
@@ -162,7 +162,7 @@ def shop_menu():
     print("Items available in the shop:")
     for index, (name, info, category) in enumerate(items):
         print(f"{index + 1}. {name} ({category}) - {info['price']} gold")
-    choice = input("Enter the number of the item you want to buy, or 'q' to quit: ")
+    choice = input("\nEnter the number of the item you want to buy, or 'q' to quit: ")
     if choice.lower() == 'q':
         main()
         return
