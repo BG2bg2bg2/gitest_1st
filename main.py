@@ -59,10 +59,10 @@ level = 1
 #END FUNCTION
 def displayAttributes():
     print("Character Attributes:")
-    print("Strength:", attributes[0])
-    print("Intelligence:", attributes[1])
-    print("Speed:", attributes[2])
-    print("Health:", attributes[3])
+    print("\nStrength:", attributes[0])
+    print("\nIntelligence:", attributes[1])
+    print("\nSpeed:", attributes[2])
+    print("\nHealth:", attributes[3])
 
 #5. Function: Apply all power-ups to attributes
 #FUNCTION applyPowerUps()
@@ -102,7 +102,7 @@ def applyPowerUps():
         elif statType == "health":
             attributes[3] += amount
 
-        print(f"Applied {name}: {statType} +{amount}")
+        print(f"\nApplied {name}: {statType} +{amount}")
 
     powerUps = []
 
@@ -142,7 +142,7 @@ def skill_change():
     # if user had 10 == souls
     if souls == 10: 
         #   show user you have unlocked special skill
-        print("you have unlocked a special skills")
+        print("\nyou have unlocked a special skills")
         #   pull one of the random skills from the list
         random_skill = random.choice(special_skills)
         #add it onto the skills
@@ -227,12 +227,12 @@ def shopping():
 def main_menu():
     while True:
         print("\n1. View Attributes")
-        print("2. Add Power-Up")
-        print("3. Use Power-Ups")
-        print("4. Inventory Menu")
-        print("5. Shop")
-        print("6. Skill Check")
-        print("7. Exit")
+        print("\n2. Add Power-Up")
+        print("\n3. Use Power-Ups")
+        print("\n4. Inventory Menu")
+        print("\n5. Shop")
+        print("\n6. Skill Check")
+        print("\n7. Exit")
         choice = input("Choose: ")
 
         if choice == "1":
@@ -259,10 +259,10 @@ def inventory_menu():
     global invent, gold
     while True:
         print("\nInventory Menu:")
-        print("1. Store Item")
-        print("2. Change Item")
-        print("3. View Inventory")
-        print("4. Quit Inventory")
+        print("\n1. Store Item")
+        print("\n2. Change Item")
+        print("\n3. View Inventory")
+        print("\n4. Quit Inventory")
         choice = input("Choose: ")
 
         # If user chooses store item
