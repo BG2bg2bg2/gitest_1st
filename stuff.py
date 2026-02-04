@@ -1,8 +1,4 @@
-# ===============================
-# RUBRIC-COMPLIANT GAME SYSTEM
-# ===============================
 
-# ---------- DATA SETUP ----------
 
 SET_level = 1
 SET_money = 100
